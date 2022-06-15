@@ -2,7 +2,7 @@ deploy:
     stage: deploy
     environment: env_name
    
-    image: 'yesudasphiliph/myamazonlinux' # image created for this purpose
+    image: 'docker_image' # image created for this purpose
     
     before_script:
         

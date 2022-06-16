@@ -12,10 +12,7 @@ deploy:
         - printf "[eb-cli]\naws_access_key_id = %s\naws_secret_access_key = %s\n" "$AWS_ACCESS_KEY" "$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials #default file, add variable values in variable section of gitlab
         - cat  ~/.aws/credentials
         - cd /root/project
-        - git clone ssh_url_of_the _repo
-        - cp php-app/* .
-        - rm -rf php-app
-        - ls ./
+        - git clone ssh_url_of_the _repo .
         - eb init --region region --platform "platform" already_existing_app  #this will end the asking for info section
 
 

@@ -1,0 +1,53 @@
+Concepts I came across during this deployment
+------------------------------------------------
+
+>first of all configure the network then only proceed further
+
+>elastic beanstalk itself creates proper security groups for instance to ELB and vice versa rules for http and/https
+
+if you need extra like an ssh connection you can set key auth and provide pub key there and create a security group for ssh connection to the instance
+
+>outbound connections to the internet is required
+
+If your EC2 instances are in a private subnet, verify that the route table associated with the NAT gateway or the NAT instance has a route to the internet. For example: 0.0.0.0/0
+
+>/var/log/eb-cfn-init.log for checking what went wrong in the instance deployed via elasticbeanstalk
+
+>custom AMIs can cause unexpected behavior
+
+the correct way of creating a custom for Beanstalk is by deploying a Beanstalk AMI to EC2, editing it, and then saving it and deploying to Beanstalk. (will try this method)
+
+>if any changes were made in the elastic beanstalk it will be gone after autoscaling
+
+>app names should be unique
+
+>errors that happened during the creation time of the environment is reported in events but for detailed log check
+/var/log/eb-cfn-init.log in the deployed instance
+
+>elb type can only be selected during creation time
+
+can migrate from a single instance to clb but can't change elb type
+
+by default, you can use alb for load balancing
+
+
+
+Deploying
+------------
+
+When deployed via eb-cli within the docker container
+
+1. cloned the git from the gitlab
+
+2. cloned files uploaded to s3 via eb-cli as a zip file
+
+3. the aws cred location used here is default and the env set here for using the default location, you can change it
+
+3. the image I created contained ssh key pair for authenticating with gitlab
+   eb-cli installed and configured
+   the image is currently in the docker hub
+   
+4. after the eb-cli uploaded the files are then to the app server
+the process looks automated need to check this further
+
+after files are copied to app server the deployment will complete
